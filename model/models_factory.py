@@ -37,4 +37,6 @@ if __name__ == "__main__":
     with get_session() as session:
         ParentFactory._meta.sqlalchemy_session = session
         StudentFactory._meta.sqlalchemy_session = session
-        students = [StudentFactory() for _ in range(10)]
+        fathers = [ParentFactory() for _ in range(10)]
+        mothers = [ParentFactory() for _ in range(10)]
+        students = [StudentFactory(father=fathers[i], mother=mothers[i]) for i in range(10)]
