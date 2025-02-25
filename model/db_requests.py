@@ -159,7 +159,7 @@ class DBRequests:
             return parents
 
     @staticmethod
-    def delete_by_income_of_parents(minimum_income=None, maximum_income=None):
+    def , (minimum_income=None, maximum_income=None):
         if minimum_income is not None and maximum_income is not None and minimum_income > maximum_income:
             raise ValueError("Минимальный доход не может быть больше максимального.")
         with get_session() as session:
