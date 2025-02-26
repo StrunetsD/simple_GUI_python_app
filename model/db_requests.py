@@ -1,9 +1,37 @@
 from sqlalchemy.orm import joinedload
 from db_conn import get_session
-from models import Student, Parent
+from .models import Student, Parent
 from sqlalchemy.exc import SQLAlchemyError
 
+
 class DBRequests:
+
+    @staticmethod
+    def add_student(first_name, middle_name, last_name, father: Parent, mother: Parent,
+                    brothers_count: int = 0, sisters_count: int = 0):
+        with get_session() as session:
+            try:
+                session.add(father)
+                session.add(mother)
+                session.flush()   # id родителя
+
+                student = Student(
+                    first_name=first_name,
+                    middle_name=middle_name,
+                    last_name=last_name,
+                    father_id=father.id,
+                    mother_id=mother.id,
+                    brothers_count=brothers_count,
+                    sisters_count=sisters_count
+                )
+
+                session.add(student)
+                session.commit()
+                return student
+
+            except Exception as e:
+                session.rollback()
+                raise ValueError(f"Ошибка при добавлении: {str(e)}")
 
     @staticmethod
     def get_query_of_students():
@@ -19,10 +47,10 @@ class DBRequests:
                 for student in students:
                     data.append((
                         student.full_name,
-                        student.get_father_full_name,
-                        student.get_father_income,
-                        student.get_mother_full_name,
-                        student.get_mother_income,
+                        student.father.full_name if student.father else "Нет данных",
+                        f"{student.father.income:.2f}" if student.father else "0.00",
+                        student.mother.full_name if student.mother else "Нет данных",
+                        f"{student.mother.income:.2f}" if student.mother else "0.00",
                         student.brothers_count,
                         student.sisters_count
                     ))

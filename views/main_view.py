@@ -1,6 +1,3 @@
-import tkinter as tk
-from tkinter import messagebox
-
 from views.table_view import TableView
 from dialog import *
 from views.pagination import Pagination
@@ -91,9 +88,18 @@ class MainWindow(tk.Tk):
         file_menu.add_command(label="Удалить студента по имени", command=self.open_delete_student_dialog)
         file_menu.add_command(label="Удалить по братьям/сестрам", command=self.open_delete_siblings_dialog)
         file_menu.add_command(label="Удалить по доходу", command=self.open_delete_income_dialog)
+        file_menu.add_command(label="Добавить студента", command=self.open_add_student_dialog)
         file_menu.add_command(label="Обновить данные", command=self.load_data)
         file_menu.add_command(label="Статистика", command=self.count)
         menubar.add_cascade(label="Операции", menu=file_menu)
+
+    def open_add_student_dialog(self):
+        try:
+            dialog = AddStudentDialog(self, self.controller)
+            self.wait_window(dialog.top)
+            self.load_data()
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Ошибка при добавлении студента: {str(e)}")
 
     def open_search_student_dialog(self):
         try:

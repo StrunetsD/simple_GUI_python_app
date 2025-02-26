@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Numeric, ForeignKey
 from sqlalchemy.orm import relationship
 
-from base import Base
+from base import Base, engine
 
 
 class Parent(Base):
@@ -13,6 +13,7 @@ class Parent(Base):
     last_name = Column(String, nullable=False)
     income = Column(Numeric(12, 2), nullable=False)
     gender = Column(String, nullable=False)
+    extend_existing = True
 
     children_as_father = relationship(
         'Student',
@@ -43,10 +44,11 @@ class Student(Base):
     first_name = Column(String, nullable=False)
     middle_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
-    father_id = Column(Integer, ForeignKey('parents.id'), nullable=False)
-    mother_id = Column(Integer, ForeignKey('parents.id'), nullable=False)
+    father_id = Column(Integer, ForeignKey('parents.id'), nullable=True)
+    mother_id = Column(Integer, ForeignKey('parents.id'), nullable=True)
     brothers_count = Column(Integer, default=0)
     sisters_count = Column(Integer, default=0)
+
 
     father = relationship(
         'Parent',
@@ -91,8 +93,14 @@ class Student(Base):
         return f"{self.sisters_count}"
 
     def __repr__(self):
+        father_name = self.father.full_name if self.father else "Неизвестно"
+        mother_name = self.mother.full_name if self.mother else "Неизвестно"
         return (
             f"Студент: {self.full_name}, \n "
-            f"Отец: {self.father.full_name},\n "
-            f"Мать: {self.mother.full_name} \n"
+            f"Отец: {father_name},\n "
+            f"Мать: {mother_name} \n"
         )
+
+
+# if __name__ == '__main__':
+#     Base.metadata.create_all(engine)

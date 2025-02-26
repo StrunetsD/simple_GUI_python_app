@@ -1,6 +1,4 @@
-import tkinter as tk
 from model.db_requests import DBRequests
-
 
 class Controller:
     def __init__(self):
@@ -10,6 +8,17 @@ class Controller:
 
     def get_students(self):
         return self.db.get_query_of_students()
+
+    def add_student(self, first_name, middle_name, last_name, father, mother, brothers_count, sisters_count):
+            self.db.add_student(
+                first_name=first_name,
+                middle_name=middle_name,
+                last_name=last_name,
+                father=father,
+                mother=mother,
+                brothers_count=brothers_count,
+                sisters_count=sisters_count
+            )
 
     def delete_by_income_of_parents(self, min_income=None, max_income=None):
         count = self.db.delete_by_income_of_parents(min_income, max_income)
@@ -53,6 +62,3 @@ class Controller:
 
     def get_counts(self):
         return self.deleted_count, self.found_count
-
-
-
