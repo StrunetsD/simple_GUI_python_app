@@ -8,11 +8,11 @@ class TableView(ttk.Frame):
         self.columns = columns or (
             "ФИО студента",
             "ФИО Отца",
-            "заработок отца",
+            "Заработок отца",
             "ФИО Матери",
-            "заработок матери",
-            "число братьев",
-            "число сестер"
+            "Заработок матери",
+            "Число братьев",
+            "Число сестер"
         )
 
         self.tree = ttk.Treeview(self, columns=self.columns, show="headings")

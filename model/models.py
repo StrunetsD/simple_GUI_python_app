@@ -92,7 +92,7 @@ class Student(Base):
 
     def __repr__(self):
         return (
-            f"<({self.full_name}, "
-            f"отец={self.father.full_name}, "
-            f"мать={self.mother.full_name})>"
+            f"Студент: {self.full_name}, \n "
+            f"Отец: {self.father.full_name},\n "
+            f"Мать: {self.mother.full_name} \n"
         )

@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+
 from views.table_view import TableView
 from dialog import *
 from views.pagination import Pagination
@@ -13,7 +16,12 @@ class MainWindow(tk.Tk):
         self.table_view = TableView(self)
         self.table_view.pack(fill=tk.BOTH, expand=True)
 
-        self.data = self.controller.get_students()
+        try:
+            self.data = self.controller.get_students()
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось загрузить данные студентов: {e}")
+            self.data = []
+
         self.pagination = Pagination(len(self.data))
 
         controls = self.create_controls(self, self.pagination, self.update_table)
@@ -25,35 +33,50 @@ class MainWindow(tk.Tk):
         self.create_menu()
 
     def load_data(self):
-        self.data = self.controller.get_students()
-        self.pagination.update_total(len(self.data))
+        try:
+            self.data = self.controller.get_students()
+            self.pagination.update_total(len(self.data))
 
-        if self.pagination.current_page > self.pagination.total_pages:
-            self.pagination.current_page = self.pagination.total_pages
-        elif self.pagination.current_page < 1:
-            self.pagination.current_page = 1
+            if self.pagination.current_page > self.pagination.total_pages:
+                self.pagination.current_page = self.pagination.total_pages
+            elif self.pagination.current_page < 1:
+                self.pagination.current_page = 1
 
-        self.update_table()
-        self.update_status_label(self.pagination, self.status_label)
+            self.update_table()
+            self.update_status_label(self.pagination, self.status_label)
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось обновить данные: {e}")
 
     def update_table(self):
-        current_data = self.pagination.get_current_page_data(self.data)
-        self.table_view.clear_data()
-        self.table_view.insert_data(current_data)
+        try:
+            current_data = self.pagination.get_current_page_data(self.data)
+            self.table_view.clear_data()
+            self.table_view.insert_data(current_data)
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось обновить таблицу: {e}")
 
     def previous_page(self):
-        self.pagination.previous_page()
-        self.update_table()
-        self.update_status_label(self.pagination, self.status_label)
+        try:
+            self.pagination.previous_page()
+            self.update_table()
+            self.update_status_label(self.pagination, self.status_label)
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось перейти на предыдущую страницу: {e}")
 
     def next_page(self):
-        self.pagination.next_page()
-        self.update_table()
-        self.update_status_label(self.pagination, self.status_label)
+        try:
+            self.pagination.next_page()
+            self.update_table()
+            self.update_status_label(self.pagination, self.status_label)
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось перейти на следующую страницу: {e}")
 
     def count(self):
-        deleted_count, found_count = self.controller.get_counts()
-        messagebox.showinfo("Статистика", f"Удалено записей: {deleted_count}\nНайдено записей: {found_count}")
+        try:
+            deleted_count, found_count = self.controller.get_counts()
+            messagebox.showinfo("Статистика", f"Удалено записей: {deleted_count}\nНайдено записей: {found_count}")
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось получить статистику: {e}")
 
     def create_menu(self):
         menubar = tk.Menu(self)
@@ -78,43 +101,61 @@ class MainWindow(tk.Tk):
             self.wait_window(dialog)
             self.load_data()
         except Exception as e:
-            print(f"Ошибка при открытии диалога поиска студента: {e}")
+            messagebox.showerror("Ошибка", f"Ошибка при открытии диалога поиска студента: {e}")
 
     def open_search_parent_dialog(self):
-        dialog = SearchParentByNameDialog(self, self.controller)
-        self.wait_window(dialog)
-        self.load_data()
+        try:
+            dialog = SearchParentByNameDialog(self, self.controller)
+            self.wait_window(dialog)
+            self.load_data()
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Ошибка при открытии диалога поиска родителя: {e}")
 
     def open_siblings_search_dialog(self):
-        dialog = SearchBySiblingsDialog(self, self.controller)
-        self.wait_window(dialog)
-        self.load_data()
+        try:
+            dialog = SearchBySiblingsDialog(self, self.controller)
+            self.wait_window(dialog)
+            self.load_data()
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Ошибка при открытии диалога поиска брата/сестры: {e}")
 
     def open_income_search_dialog(self):
-        dialog = IncomeSearchDialog(self, self.controller)
-        self.wait_window(dialog)
-        self.load_data()
+        try:
+            dialog = IncomeSearchDialog(self, self.controller)
+            self.wait_window(dialog)
+            self.load_data()
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Ошибка при открытии диалога поиска по заработку: {e}")
 
     def open_delete_student_dialog(self):
-        dialog = DeleteStudentByNameDialog(self, self.controller)
-        self.wait_window(dialog)
-        self.load_data()
-        deleted, found = self.controller.get_counts()
-        messagebox.showinfo("Статистика", f"Всего удалено: {deleted}\nВсего найдено: {found}")
+        try:
+            dialog = DeleteStudentByNameDialog(self, self.controller)
+            self.wait_window(dialog)
+            self.load_data()
+            deleted, found = self.controller.get_counts()
+            messagebox.showinfo("Статистика", f"Всего удалено: {deleted}\nВсего найдено: {found}")
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Ошибка при открытии диалога удаления студента: {e}")
 
     def open_delete_siblings_dialog(self):
-        dialog = DeleteBySiblingsDialog(self, self.controller)
-        self.wait_window(dialog)
-        self.load_data()
-        deleted, found = self.controller.get_counts()
-        messagebox.showinfo("Статистика", f"Всего удалено: {deleted}\nВсего найдено: {found}")
+        try:
+            dialog = DeleteBySiblingsDialog(self, self.controller)
+            self.wait_window(dialog)
+            self.load_data()
+            deleted, found = self.controller.get_counts()
+            messagebox.showinfo("Статистика", f"Всего удалено: {deleted}\nВсего найдено: {found}")
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Ошибка при открытии диалога удаления по брату/сестре: {e}")
 
     def open_delete_income_dialog(self):
-        dialog = DeleteByIncomeDialog(self, self.controller)
-        self.wait_window(dialog)
-        self.load_data()
-        deleted, found = self.controller.get_counts()
-        messagebox.showinfo("Статистика", f"Всего удалено: {deleted}\nВсего найдено: {found}")
+        try:
+            dialog = DeleteByIncomeDialog(self, self.controller)
+            self.wait_window(dialog)
+            self.load_data()
+            deleted, found = self.controller.get_counts()
+            messagebox.showinfo("Статистика", f"Всего удалено: {deleted}\nВсего найдено: {found}")
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Ошибка при открытии диалога удаления по доходу: {e}")
 
     @staticmethod
     def update_status_label(pagination, status_label):
