@@ -211,7 +211,7 @@ class DBRequests:
                 parents_to_delete = query.all()
 
                 if not parents_to_delete:
-                    raise ValueError("Нет родителей для удаления.")
+                    raise ValueError("Нет записей для удаления.")
 
                 for parent in parents_to_delete:
                     session.delete(parent)
@@ -219,4 +219,4 @@ class DBRequests:
                 session.commit()
                 return len(parents_to_delete)
         except SQLAlchemyError as e:
-            raise ValueError(f"Ошибка при удалении родителей по доходу: {e}")
+            raise ValueError(f"Ошибка при удалении по доходу: {e}")
