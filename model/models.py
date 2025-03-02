@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Numeric, ForeignKey
 from sqlalchemy.orm import relationship
 
-from base import Base, engine
+from base import Base
 
 
 class Parent(Base):
@@ -100,7 +100,3 @@ class Student(Base):
             f"Отец: {father_name},\n "
             f"Мать: {mother_name} \n"
         )
-
-
-# if __name__ == '__main__':
-#     Base.metadata.create_all(engine)
