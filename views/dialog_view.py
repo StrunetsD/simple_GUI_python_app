@@ -202,22 +202,7 @@ class RangeInputDialog(BaseDialog):
             return False
 
     def apply(self):
-        if not messagebox.askyesno("Подтверждение", "Вы уверены, что хотите выполнить удаление?"):
-            return
-
-        try:
-            min_val = float(self.min_entry.get())
-            max_val = float(self.max_entry.get())
-            deleted_count = self.apply_method(min_val, max_val)
-
-            self.show_results(
-                deleted_count,
-                title="Результаты удаления",
-                success_message="Удалено записей: {}",
-                empty_message=f"Записи с доходом от {min_val} до {max_val} не найдены"
-            )
-        except Exception as e:
-            messagebox.showerror("Ошибка", str(e))
+        pass
 
 
 class SearchStudentByNameDialog(SearchBaseDialog):
@@ -264,6 +249,22 @@ class IncomeSearchDialog(RangeInputDialog):
             apply_method=controller.search_by_income_of_parents
         )
 
+    def apply(self):
+        if not self.validate():
+            return
+        try:
+            min_val = float(self.min_entry.get())
+            max_val = float(self.max_entry.get())
+            results = self.apply_method(min_val, max_val)
+            self.show_results(
+                results,
+                title="Результаты поиска",
+                success_message="Найдено записей: {}",
+                empty_message="Записи не найдены"
+            )
+        except Exception as e:
+            messagebox.showerror("Ошибка", str(e))
+
 
 class DeleteStudentByNameDialog(DeleteBaseDialog):
     def __init__(self, parent, controller):
@@ -297,6 +298,24 @@ class DeleteByIncomeDialog(RangeInputDialog):
             max_label="Максимальный доход:",
             apply_method=controller.delete_by_income_of_parents
         )
+
+    def apply(self):
+        if not messagebox.askyesno("Подтверждение", "Вы уверены, что хотите выполнить удаление?"):
+            return
+
+        try:
+            min_val = float(self.min_entry.get())
+            max_val = float(self.max_entry.get())
+            deleted_count = self.apply_method(min_val, max_val)
+
+            self.show_results(
+                deleted_count,
+                title="Результаты удаления",
+                success_message="Удалено записей: {}",
+                empty_message=f"Записи с доходом от {min_val} до {max_val} не найдены"
+            )
+        except Exception as e:
+            messagebox.showerror("Ошибка", str(e))
 
 
 class AddStudentDialog(AddBaseDialog):
