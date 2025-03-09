@@ -1,3 +1,63 @@
+import tkinter as tk
+from tkinter import messagebox
+
+from table_tree_view import TableView
+
+
+class SearchResultsWindow(tk.Toplevel):
+    def __init__(self, parent, results, title="Результаты поиска"):
+        super().__init__(parent)
+        self.title(title)
+        self.geometry("800x600")
+
+        self.results = results
+        self.table_view = TableView(self)
+        self.table_view.pack(fill=tk.BOTH, expand=True)
+
+        self.pagination = Pagination(len(results))
+        self.create_controls()
+
+        self.update_table()
+
+    def create_controls(self):
+        control_frame = tk.Frame(self)
+        control_frame.pack(fill=tk.X, pady=10, padx=10)
+
+        nav_frame = tk.Frame(control_frame)
+        nav_frame.pack(side=tk.LEFT)
+
+        tk.Button(nav_frame, text="<<",
+                  command=lambda: self._handle_pagination_action(self.pagination.first_page)).pack(side=tk.LEFT)
+        tk.Button(nav_frame, text="<",
+                  command=lambda: self._handle_pagination_action(self.pagination.previous_page)).pack(side=tk.LEFT)
+        tk.Button(nav_frame, text=">", command=lambda: self._handle_pagination_action(self.pagination.next_page)).pack(
+            side=tk.LEFT)
+        tk.Button(nav_frame, text=">>", command=lambda: self._handle_pagination_action(self.pagination.last_page)).pack(
+            side=tk.LEFT)
+
+        self.status_label = tk.Label(control_frame, text="")
+        self.status_label.pack(side=tk.RIGHT)
+
+    def update_table(self):
+        try:
+            current_data = self.pagination.get_current_page_data(self.results)
+            self.table_view.clear_data()
+            if current_data:
+                self.table_view.insert_data(current_data)
+            self.update_status_label()
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Ошибка обновления: {str(e)}")
+
+    def update_status_label(self):
+        self.status_label.config(
+            text=f"Страница {self.pagination.current_page} из {self.pagination.total_pages}"
+        )
+
+    def _handle_pagination_action(self, action):
+        action()
+        self.update_table()
+
+
 class Pagination:
     def __init__(self, total_items, page_size=10):
         if total_items < 0:

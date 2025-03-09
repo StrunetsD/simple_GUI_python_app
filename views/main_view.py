@@ -1,9 +1,9 @@
-from views.table_view import TableView
+import tkinter as tk
+from tkinter import ttk, messagebox
+from views.table_tree_view import TableView, TreeView
 from dialog_view import *
 from views.pagination import Pagination
 from controllers.controllers import Controller
-from tkinter import ttk, messagebox
-
 
 class StartWindow(tk.Tk):
     def __init__(self):
@@ -24,7 +24,6 @@ class StartWindow(tk.Tk):
         app = MainWindow(mode)
         app.mainloop()
 
-
 class MainWindow(tk.Tk):
     def __init__(self, mode):
         super().__init__()
@@ -32,15 +31,28 @@ class MainWindow(tk.Tk):
         self.geometry("600x400")
         self.mode = mode
         self.controller = Controller(mode)
-        ttk.Label(self, text=f"Режим работы: {mode.upper()}").pack(side=tk.TOP, pady=5)
+
+        self.notebook = ttk.Notebook(self)
+        self.notebook.pack(fill=tk.BOTH, expand=True)
 
         self.table_view = TableView(self)
-        self.table_view.pack(fill=tk.BOTH, expand=True)
+        self.tree_view = TreeView(self)
+
+        self.table_tab = ttk.Frame(self.notebook)
+        self.tree_tab = ttk.Frame(self.notebook)
+
+        self.notebook.add(self.table_tab, text="Таблица")
+        self.notebook.add(self.tree_tab, text="Дерево")
+
+        self.table_view.pack(fill=tk.BOTH, expand=True, in_=self.table_tab)
+        self.tree_view.pack(fill=tk.BOTH, expand=True, in_=self.tree_tab)
+
+        ttk.Label(self, text=f"Режим работы: {mode.upper()}").pack(side=tk.TOP, pady=5)
 
         try:
             self.data = self.controller.get_students()
         except Exception:
-            messagebox.showerror("Ошибка", f"Не удалось загрузить данные студентов")
+            messagebox.showerror("Ошибка", "Не удалось загрузить данные студентов")
             self.data = []
 
         self.pagination = Pagination(len(self.data))
@@ -52,6 +64,21 @@ class MainWindow(tk.Tk):
         self.update_status_label(self.pagination, self.status_label)
 
         self.create_menu()
+
+    def _format_data_xml(self, raw_data):
+        formatted_data = []
+        for student in raw_data:
+            row = [
+                student.fio,
+                student.father_fio,
+                student.father_income,
+                student.mother_fio,
+                student.mother_income,
+                student.brother_count,
+                student.sister_count
+            ]
+            formatted_data.append(row)
+        return formatted_data
 
     def load_data(self):
         try:
@@ -66,15 +93,23 @@ class MainWindow(tk.Tk):
             self.update_table()
             self.update_status_label(self.pagination, self.status_label)
         except Exception:
-            messagebox.showerror("Ошибка", f"Не удалось обновить данные")
+            messagebox.showerror("Ошибка", "Не удалось обновить данные")
 
     def update_table(self):
         try:
             current_data = self.pagination.get_current_page_data(self.data)
             self.table_view.clear_data()
-            self.table_view.insert_data(current_data)
+            if self.mode == "xml":
+                formatted_data = self._format_data_xml(current_data)
+                self.table_view.insert_data(formatted_data)
+                self.tree_view.clear_data()
+                self.tree_view.insert_data(formatted_data)
+            else:
+                self.table_view.insert_data(current_data)
+                self.tree_view.clear_data()
+                self.tree_view.insert_data(current_data)
         except Exception:
-            messagebox.showerror("Ошибка", f"Не удалось обновить таблицу")
+            messagebox.showerror("Ошибка", "Не удалось обновить таблицу")
 
     def previous_page(self):
         try:
@@ -82,7 +117,7 @@ class MainWindow(tk.Tk):
             self.update_table()
             self.update_status_label(self.pagination, self.status_label)
         except Exception:
-            messagebox.showerror("Ошибка", f"Не удалось перейти на предыдущую страницу")
+            messagebox.showerror("Ошибка", "Не удалось перейти на предыдущую страницу")
 
     def next_page(self):
         try:
@@ -90,14 +125,14 @@ class MainWindow(tk.Tk):
             self.update_table()
             self.update_status_label(self.pagination, self.status_label)
         except Exception:
-            messagebox.showerror("Ошибка", f"Не удалось перейти на следующую страницу")
+            messagebox.showerror("Ошибка", "Не удалось перейти на следующую страницу")
 
     def count(self):
         try:
             deleted_count, found_count = self.controller.get_counts()
             messagebox.showinfo("Статистика", f"Удалено записей: {deleted_count}\nНайдено записей: {found_count}")
         except Exception:
-            messagebox.showerror("Ошибка", f"Не удалось получить статистику")
+            messagebox.showerror("Ошибка", "Не удалось получить статистику")
 
     def create_menu(self):
         menubar = tk.Menu(self)
@@ -121,7 +156,6 @@ class MainWindow(tk.Tk):
         dialog = AddStudentDialog(self, self.controller)
         self.wait_window(dialog)
         self.load_data()
-
 
     def open_search_student_dialog(self):
         dialog = SearchStudentByNameDialog(self, self.controller)
@@ -177,22 +211,22 @@ class MainWindow(tk.Tk):
         nav_frame.pack(side=tk.LEFT)
 
         first_button = tk.Button(nav_frame, text="<<", command=lambda: self._handle_pagination_action(
-            lambda: pagination.first_page(), pagination, update_table_callback, status_label
+            lambda: pagination.first_page(), pagination, update_table_callback, self.status_label
         ))
         first_button.pack(side=tk.LEFT)
 
         prev_button = tk.Button(nav_frame, text="<", command=lambda: self._handle_pagination_action(
-            lambda: pagination.previous_page(), pagination, update_table_callback, status_label
+            lambda: pagination.previous_page(), pagination, update_table_callback, self.status_label
         ))
         prev_button.pack(side=tk.LEFT, padx=5)
 
         next_button = tk.Button(nav_frame, text=">", command=lambda: self._handle_pagination_action(
-            lambda: pagination.next_page(), pagination, update_table_callback, status_label
+            lambda: pagination.next_page(), pagination, update_table_callback, self.status_label
         ))
         next_button.pack(side=tk.LEFT)
 
         last_button = tk.Button(nav_frame, text=">>", command=lambda: self._handle_pagination_action(
-            lambda: pagination.last_page(), pagination, update_table_callback, status_label
+            lambda: pagination.last_page(), pagination, update_table_callback, self.status_label
         ))
         last_button.pack(side=tk.LEFT, padx=5)
 
@@ -202,7 +236,6 @@ class MainWindow(tk.Tk):
         tk.Label(page_size_frame, text="Строк на странице:").pack(side=tk.LEFT)
 
         page_size_var = tk.StringVar(value="10")
-
         validation = (parent.register(self._validate_page_size), '%P')
         page_size_entry = tk.Entry(
             page_size_frame,
@@ -214,20 +247,21 @@ class MainWindow(tk.Tk):
         page_size_entry.pack(side=tk.LEFT, padx=5)
 
         page_size_entry.bind("<Return>", lambda e: self._apply_page_size(
-            page_size_var, pagination, update_table_callback, status_label
+            page_size_var, pagination, update_table_callback, self.status_label
         ))
 
         info_frame = tk.Frame(control_frame)
         info_frame.pack(side=tk.RIGHT, padx=20)
-        status_label = tk.Label(info_frame, text="")
-        status_label.pack()
+        self.status_label = tk.Label(info_frame, text="")
+        self.status_label.pack()
 
         if pagination:
-            self.update_status_label(pagination, status_label)
+            self.update_status_label(pagination, self.status_label)
 
         return {
-            "status_label": status_label,
+            "status_label": self.status_label,
             "page_size_var": page_size_var,
+            "control_frame": control_frame
         }
 
     @staticmethod

@@ -44,9 +44,9 @@ class TreeView(ttk.Frame):
 
         for student in data:
             student_id = self.tree.insert("", "end", text=student[0], values=("Студент"))
-            father_info = f"Отец: {student[1]} (Доход: {student[2]})"
+            father_info = f"Отец: {student[1]}"
             self.tree.insert(student_id, "end", text=father_info)
-            mother_info = f"Мать: {student[3]} (Доход: {student[4]})"
+            mother_info = f"Мать: {student[3]}"
             self.tree.insert(student_id, "end", text=mother_info)
             siblings_info = f"Братья: {student[5]}, Сестры: {student[6]}"
             self.tree.insert(student_id, "end", text=siblings_info)

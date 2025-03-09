@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<students>
+  <student>
+    <fio>Иванов Иван Иванович</fio>
+    <father_fio>Иванов Иван Иванович</father_fio>
+    <mother_fio>Иванова Мария Петровна</mother_fio>
+    <father_income>50000.0</father_income>
+    <mother_income>30000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>2</sister_count>
+  </student>
+  <student>
+    <fio>Сидоров Сидор Сидорович</fio>
+    <father_fio>Сидоров Сидор Сидорович</father_fio>
+    <mother_fio>Сидорова Ольга Александровна</mother_fio>
+    <father_income>70000.0</father_income>
+    <mother_income>50000.0</mother_income>
+    <brother_count>2</brother_count>
+    <sister_count>0</sister_count>
+  </student>
+  <student>
+    <fio>asdfsdaf asdfsdaf asdfsdaf</fio>
+    <father_fio>Отец: asdfsdaf asdfsdaf asdfsdaf, доход: 1.0, пол: male</father_fio>
+    <mother_fio>Мать: asdfsdaf asdfsdaf asdfsdaf, доход: 1.0, пол: female</mother_fio>
+    <father_income>0.0</father_income>
+    <mother_income>0.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+</students>

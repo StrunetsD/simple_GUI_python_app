@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Numeric, ForeignKey
 from sqlalchemy.orm import relationship
 
-from base import Base
+from base import Base, engine
 
 
 class Parent(Base):
@@ -34,8 +34,9 @@ class Parent(Base):
         return f"{self.first_name} {self.middle_name} {self.last_name}"
 
     def __repr__(self):
-        return f"<({self.first_name} {self.middle_name} {self.last_name}, {self.income}, gender={self.gender})>"
-
+        if self.gender == "female":
+            return f"Мать: {self.last_name} {self.first_name} {self.middle_name}, доход: {self.income}, пол: {self.gender}\n"
+        return f"Отец: {self.last_name} {self.first_name} {self.middle_name}, доход: {self.income}, пол: {self.gender}\n"
 
 class Student(Base):
     __tablename__ = 'students'
@@ -100,3 +101,7 @@ class Student(Base):
             f"Отец: {father_name},\n "
             f"Мать: {mother_name} \n"
         )
+
+
+if __name__ == '__main__':
+    Base.metadata.create_all(engine)

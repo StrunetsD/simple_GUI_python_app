@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import simpledialog, messagebox
 
 from model.models import Parent
-
+from pagination import SearchResultsWindow
 
 class BaseDialog(simpledialog.Dialog):
     def __init__(self, parent, controller, title=None):
@@ -58,7 +58,7 @@ class BaseDialog(simpledialog.Dialog):
             else:
                 messagebox.showinfo(title, empty_message)
         else:
-            result_text = "\n".join([str(result) for result in results])
+            result_text = "".join([str(result) for result in results])
             messagebox.showinfo(title, result_text)
 
     @staticmethod
@@ -120,9 +120,10 @@ class AddBaseDialog(BaseDialog):
 
 
 class SearchBaseDialog(BaseDialog):
-    def __init__(self, parent, controller, title, field_label, search_method):
+    def __init__(self, parent, controller, title, field_label, search_method, validation_method=None):
         self.field_label = field_label
         self.search_method = search_method
+        self.validation_method = validation_method
         super().__init__(parent, controller, title=title)
 
     def body(self, master):
@@ -130,22 +131,24 @@ class SearchBaseDialog(BaseDialog):
         return self.entry
 
     def validate(self):
-        value = self.entry.get()
-        if not value.strip():
+        value = self.entry.get().strip()
+        if not value:
             messagebox.showwarning("Ошибка", "Поле не может быть пустым")
+            return False
+        if self.validation_method and not self.validation_method(value):
+            messagebox.showwarning("Ошибка", "Некорректные данные")
             return False
         return True
 
     def apply(self):
-        search_term = self.entry.get().strip()
-        results = self.search_method(search_term)
-        self.show_results(results, title="Результаты поиска")
+        pass
 
 
 class DeleteBaseDialog(BaseDialog):
-    def __init__(self, parent, controller, title, field_label, delete_method):
+    def __init__(self, parent, controller, title, field_label, delete_method, validation_method=None):
         self.field_label = field_label
         self.delete_method = delete_method
+        self.validation_method = validation_method
         super().__init__(parent, controller, title=title)
 
     def body(self, master):
@@ -153,9 +156,12 @@ class DeleteBaseDialog(BaseDialog):
         return self.entry
 
     def validate(self):
-        value = self.entry.get()
-        if not value.strip():
+        value = self.entry.get().strip()
+        if not value:
             messagebox.showwarning("Ошибка", "Поле не может быть пустым")
+            return False
+        if self.validation_method and not self.validation_method(value):
+            messagebox.showwarning("Ошибка", "Некорректные данные")
             return False
         return True
 
@@ -173,6 +179,7 @@ class DeleteBaseDialog(BaseDialog):
             )
         except Exception as e:
             messagebox.showerror("Ошибка", str(e))
+
 
 
 class RangeInputDialog(BaseDialog):
@@ -212,19 +219,17 @@ class SearchStudentByNameDialog(SearchBaseDialog):
             controller=controller,
             title="Поиск по имени студента",
             field_label="Введите часть ФИО студента:",
-            search_method=controller.search_students_by_name
+            search_method=controller.search_students_by_name,
+            validation_method=BaseDialog.validate_name
         )
 
-
-class SearchParentByNameDialog(SearchBaseDialog):
-    def __init__(self, parent, controller):
-        super().__init__(
-            parent=parent,
-            controller=controller,
-            title="Поиск по имени родителя",
-            field_label="Введите часть ФИО родителя:",
-            search_method=controller.search_parents_by_name
-        )
+    def apply(self):
+        search_term = self.entry.get().strip()
+        results = self.search_method(search_term)
+        if results:
+            SearchResultsWindow(self.master, results)
+        else:
+            messagebox.showinfo("Результаты", "Записи не найдены.")
 
 
 class SearchBySiblingsDialog(SearchBaseDialog):
@@ -234,8 +239,37 @@ class SearchBySiblingsDialog(SearchBaseDialog):
             controller=controller,
             title="Поиск по количеству братьев/сестёр",
             field_label="Введите количество братьев или сестер:",
-            search_method=controller.search_by_count_of_brothers_or_sisters
+            search_method=controller.search_by_count_of_brothers_or_sisters,
+            validation_method=BaseDialog.validate_int
         )
+
+    def apply(self):
+        search_term = self.entry.get().strip()
+        results = self.search_method(search_term)
+        if results:
+            SearchResultsWindow(self.master, results)
+        else:
+            messagebox.showinfo("Результаты", "Записи не найдены.")
+
+
+class SearchParentByNameDialog(SearchBaseDialog):
+    def __init__(self, parent, controller):
+        super().__init__(
+            parent=parent,
+            controller=controller,
+            title="Поиск по имени родителя",
+            field_label="Введите часть ФИО родителя:",
+            search_method=controller.search_parents_by_name,
+            validation_method=BaseDialog.validate_name
+        )
+
+    def apply(self):
+        search_term = self.entry.get().strip()
+        results = self.search_method(search_term)
+        if results:
+            SearchResultsWindow(self.master, results)
+        else:
+            messagebox.showinfo("Результаты", "Записи не найдены.")
 
 
 class IncomeSearchDialog(RangeInputDialog):
@@ -256,12 +290,10 @@ class IncomeSearchDialog(RangeInputDialog):
             min_val = float(self.min_entry.get())
             max_val = float(self.max_entry.get())
             results = self.apply_method(min_val, max_val)
-            self.show_results(
-                results,
-                title="Результаты поиска",
-                success_message="Найдено записей: {}",
-                empty_message="Записи не найдены"
-            )
+            if results:
+                SearchResultsWindow(self.master, results)
+            else:
+                messagebox.showinfo("Результаты", "Записи не найдены.")
         except Exception as e:
             messagebox.showerror("Ошибка", str(e))
 
@@ -273,7 +305,8 @@ class DeleteStudentByNameDialog(DeleteBaseDialog):
             controller=controller,
             title="Удаление по имени студента",
             field_label="Введите часть ФИО студента:",
-            delete_method=controller.delete_student_by_name
+            delete_method=controller.delete_student_by_name,
+            validation_method=BaseDialog.validate_name
         )
 
 
@@ -282,11 +315,11 @@ class DeleteBySiblingsDialog(DeleteBaseDialog):
         super().__init__(
             parent=parent,
             controller=controller,
-            field_label="Введите количество братьев или сестер:",
             title="Удаление по количеству братьев/сестёр",
-            delete_method=controller.delete_by_count_of_brothers_or_sisters
+            field_label="Введите количество братьев или сестер:",
+            delete_method=controller.delete_by_count_of_brothers_or_sisters,
+            validation_method=BaseDialog.validate_int
         )
-
 
 class DeleteByIncomeDialog(RangeInputDialog):
     def __init__(self, parent, controller):
@@ -316,7 +349,6 @@ class DeleteByIncomeDialog(RangeInputDialog):
             )
         except Exception as e:
             messagebox.showerror("Ошибка", str(e))
-
 
 class AddStudentDialog(AddBaseDialog):
     def __init__(self, parent, controller):
@@ -356,31 +388,47 @@ class AddStudentDialog(AddBaseDialog):
 
     def process_data(self, data):
         try:
-            father = Parent(
-                first_name=data['father_first'],
-                middle_name=data['father_middle'],
-                last_name=data['father_last'],
-                income=round(float(data['father_income']), 2),
-                gender="male"
-            )
+            father_income = float(data['father_income'])
+            mother_income = float(data['mother_income'])
 
-            mother = Parent(
-                first_name=data['mother_first'],
-                middle_name=data['mother_middle'],
-                last_name=data['mother_last'],
-                income=round(float(data['mother_income']), 2),
-                gender="female"
-            )
-
-            self.controller.add_student(
-                first_name=data['first_name'],
-                middle_name=data['middle_name'],
-                last_name=data['last_name'],
-                father=father,
-                mother=mother,
-                brothers_count=int(data['brothers_count']),
-                sisters_count=int(data['sisters_count'])
-            )
+            if self.controller.mode == "xml":
+                self.controller.add_student(
+                    first_name=data['first_name'],
+                    middle_name=data['middle_name'],
+                    last_name=data['last_name'],
+                    father=data['father_last'] + " " + data['father_first'] + " " + data['father_middle'],
+                    mother=data['mother_last'] + " " + data['mother_first'] + " " + data['mother_middle'],
+                    father_income=father_income,
+                    mother_income=mother_income,
+                    brothers_count=int(data['brothers_count']),
+                    sisters_count=int(data['sisters_count'])
+                )
+            elif self.controller.mode == "db":
+                father = Parent(
+                    first_name=data['father_first'],
+                    middle_name=data['father_middle'],
+                    last_name=data['father_last'],
+                    income=father_income,
+                    gender="male"
+                )
+                mother = Parent(
+                    first_name=data['mother_first'],
+                    middle_name=data['mother_middle'],
+                    last_name=data['mother_last'],
+                    income=mother_income,
+                    gender="female"
+                )
+                self.controller.add_student(
+                    first_name=data['first_name'],
+                    middle_name=data['middle_name'],
+                    last_name=data['last_name'],
+                    father=father,
+                    mother=mother,
+                    brothers_count=int(data['brothers_count']),
+                    sisters_count=int(data['sisters_count'])
+                )
+            else:
+                raise ValueError("Неподдерживаемый режим работы")
 
             messagebox.showinfo("Успех", "Студент успешно добавлен")
         except Exception as e:
