@@ -1,18 +1,23 @@
-import xml.sax
-import xml.dom.minidom
 import os
+import xml.dom.minidom
+import xml.sax
+
 from xml_models import XMLStudent
 
 
 class XMLManager:
-    def __init__(self, students_file='data_xml/students_one.xml'):
+    def __init__(self, students_file=None):
         self.students_file = students_file
+
+    def set_file(self, file_path):
+        self.students_file = file_path
         self._init_files()
 
     def _init_files(self):
-        os.makedirs(os.path.dirname(self.students_file), exist_ok=True)
-        if not os.path.exists(self.students_file):
-            self.save_students([])
+        if self.students_file:
+            os.makedirs(os.path.dirname(self.students_file), exist_ok=True)
+            if not os.path.exists(self.students_file):
+                self.save_students([])
 
     def save_students(self, students):
         doc = xml.dom.minidom.Document()
@@ -96,6 +101,7 @@ class StudentsModel:
         parser.setContentHandler(handler)
         parser.parse(file_path)
         self.students = handler.students
+        self.xml_manager.set_file(file_path)
         return self.students
 
     def save_students(self):

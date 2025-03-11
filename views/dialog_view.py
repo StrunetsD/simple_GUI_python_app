@@ -4,6 +4,7 @@ from tkinter import simpledialog, messagebox
 from model.models import Parent
 from pagination import SearchResultsWindow
 
+
 class BaseDialog(simpledialog.Dialog):
     def __init__(self, parent, controller, title=None):
         self.controller = controller
@@ -181,7 +182,6 @@ class DeleteBaseDialog(BaseDialog):
             messagebox.showerror("Ошибка", str(e))
 
 
-
 class RangeInputDialog(BaseDialog):
     def __init__(self, parent, controller, title, min_label, max_label, apply_method):
         self.min_label = min_label
@@ -321,6 +321,7 @@ class DeleteBySiblingsDialog(DeleteBaseDialog):
             validation_method=BaseDialog.validate_int
         )
 
+
 class DeleteByIncomeDialog(RangeInputDialog):
     def __init__(self, parent, controller):
         super().__init__(
@@ -349,6 +350,7 @@ class DeleteByIncomeDialog(RangeInputDialog):
             )
         except Exception as e:
             messagebox.showerror("Ошибка", str(e))
+
 
 class AddStudentDialog(AddBaseDialog):
     def __init__(self, parent, controller):

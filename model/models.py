@@ -38,6 +38,7 @@ class Parent(Base):
             return f"Мать: {self.last_name} {self.first_name} {self.middle_name}, доход: {self.income}, пол: {self.gender}\n"
         return f"Отец: {self.last_name} {self.first_name} {self.middle_name}, доход: {self.income}, пол: {self.gender}\n"
 
+
 class Student(Base):
     __tablename__ = 'students'
 
@@ -49,7 +50,6 @@ class Student(Base):
     mother_id = Column(Integer, ForeignKey('parents.id'), nullable=True)
     brothers_count = Column(Integer, default=0)
     sisters_count = Column(Integer, default=0)
-
 
     father = relationship(
         'Parent',

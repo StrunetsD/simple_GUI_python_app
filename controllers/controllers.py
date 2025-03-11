@@ -1,6 +1,8 @@
 from model.db_requests import DBRequests
-from xml_manager import XMLManager, StudentsSAXHandler
 from xml_manager import StudentsModel as xmlStudents
+from xml_manager import XMLManager
+
+
 class Controller:
     def __init__(self, mode):
         self.db = DBRequests()
@@ -104,13 +106,12 @@ class Controller:
             self.found_count += len(results)
             return results
 
-
     def search_by_count_of_brothers_or_sisters(self, count):
         if self.mode == "db":
             results = self.db.search_by_count_of_brothers_or_sisters(count)
             formatted_result = []
             for student in results:
-                formatted=(
+                formatted = (
                     f"{student.last_name} {student.first_name} {student.middle_name}",
                     f"{student.father.last_name} {student.father.first_name} {student.father.middle_name}",
                     student.father.income,
@@ -142,9 +143,9 @@ class Controller:
     def search_students_by_name(self, search_term):
         if self.mode == "db":
             results = self.db.search_students_by_name(search_term)
-            formatted= []
+            formatted = []
             for student in results:
-                formatted_results=(
+                formatted_results = (
                     f"{student.last_name} {student.first_name} {student.middle_name}",
                     f"{student.father.last_name} {student.father.first_name} {student.father.middle_name}",
                     student.father.income,

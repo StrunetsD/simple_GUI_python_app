@@ -31,6 +31,7 @@ class TableView(ttk.Frame):
         for row in self.tree.get_children():
             self.tree.delete(row)
 
+
 class TreeView(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent)

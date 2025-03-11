@@ -15,5 +15,3 @@ class XMLStudent:
         self.mother_income = float(mother_income)
         self.brother_count = int(brother_count)
         self.sister_count = int(sister_count)
-
-

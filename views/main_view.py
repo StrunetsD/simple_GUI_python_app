@@ -1,9 +1,10 @@
-import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
-from views.table_tree_view import TableView, TreeView
+from tkinter import ttk, filedialog
+
+from controllers.controllers import Controller
 from dialog_view import *
 from views.pagination import Pagination
-from controllers.controllers import Controller
+from views.table_tree_view import TableView, TreeView
+
 
 class StartWindow(tk.Tk):
     def __init__(self):
@@ -23,6 +24,7 @@ class StartWindow(tk.Tk):
         self.destroy()
         app = MainWindow(mode)
         app.mainloop()
+
 
 class MainWindow(tk.Tk):
     def __init__(self, mode):

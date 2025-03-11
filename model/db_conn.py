@@ -1,9 +1,11 @@
 from contextlib import contextmanager
+
 from sqlalchemy.orm import sessionmaker
 
 from base import engine
 
 Session = sessionmaker(bind=engine, expire_on_commit=False)
+
 
 @contextmanager
 def get_session():

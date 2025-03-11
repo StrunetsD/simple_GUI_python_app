@@ -1,7 +1,8 @@
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import joinedload
+
 from db_conn import get_session
 from .models import Student, Parent
-from sqlalchemy.exc import SQLAlchemyError
 
 
 class DBRequests:
@@ -13,7 +14,7 @@ class DBRequests:
             try:
                 session.add(father)
                 session.add(mother)
-                session.flush()   # id родителя
+                session.flush()  # id родителя
 
                 student = Student(
                     first_name=first_name,
