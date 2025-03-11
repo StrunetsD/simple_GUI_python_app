@@ -21,8 +21,7 @@ class Controller:
         else:
             raise ValueError("Неподдерживаемый режим работы")
 
-    def get_students(self):
-        file_path = "data_xml/students_one.xml"
+    def get_students(self, file_path=None):
         if self.mode == "xml":
             students = self.xml_model.load_students(file_path)  # Загрузка данных
             return students
@@ -53,9 +52,14 @@ class Controller:
             )
 
     def delete_by_income_of_parents(self, min_income=None, max_income=None):
-        count = self.db.delete_by_income_of_parents(min_income, max_income)
-        self.deleted_count += count
-        return f"Удалено {count} записей"
+        if self.mode == "db":
+            count = self.db.delete_by_income_of_parents(min_income, max_income)
+            self.deleted_count += count
+            return f"Удалено {count} записей"
+        else:
+            count = self.xml_model.delete_by_income_parents(min_income, max_income)
+            self.deleted_count += count
+            return f"Удалено {count} записей"
 
     def search_by_income_of_parents(self, min_income, max_income):
         if self.mode == "db":
@@ -218,6 +222,7 @@ class Controller:
             return formatted_result
 
     def delete_by_count_of_brothers_or_sisters(self, count: int):
+        count = int(count)
         if self.mode == "db":
             count = self.db.delete_by_count_of_brothers_or_sisters(count)
             self.deleted_count += count

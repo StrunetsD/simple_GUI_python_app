@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, filedialog
 from views.table_tree_view import TableView, TreeView
 from dialog_view import *
 from views.pagination import Pagination
@@ -49,12 +49,7 @@ class MainWindow(tk.Tk):
 
         ttk.Label(self, text=f"Режим работы: {mode.upper()}").pack(side=tk.TOP, pady=5)
 
-        try:
-            self.data = self.controller.get_students()
-        except Exception:
-            messagebox.showerror("Ошибка", "Не удалось загрузить данные студентов")
-            self.data = []
-
+        self.data = []
         self.pagination = Pagination(len(self.data))
 
         controls = self.create_controls(self, self.pagination, self.update_table)
@@ -134,23 +129,49 @@ class MainWindow(tk.Tk):
         except Exception:
             messagebox.showerror("Ошибка", "Не удалось получить статистику")
 
+    def load_students_from_file(self):
+        file_path = filedialog.askopenfilename(filetypes=[("XML files", "*.xml")])
+        if file_path:
+            try:
+                self.data = self.controller.get_students(file_path)
+                self.pagination.update_total(len(self.data))
+                self.update_table()
+                messagebox.showinfo("Успех", "Данные загружены!")
+            except Exception as e:
+                messagebox.showerror("Ошибка", f"Ошибка загрузки: {str(e)}")
+
     def create_menu(self):
         menubar = tk.Menu(self)
         self.config(menu=menubar)
 
         file_menu = tk.Menu(menubar, tearoff=0)
-        file_menu.add_command(label="Поиск студента по имени", command=self.open_search_student_dialog)
-        file_menu.add_command(label="Поиск родителя по имени", command=self.open_search_parent_dialog)
-        file_menu.add_command(label="Поиск по братьям/сестрам", command=self.open_siblings_search_dialog)
-        file_menu.add_command(label="Поиск по доходу", command=self.open_income_search_dialog)
-        file_menu.add_separator()
-        file_menu.add_command(label="Удалить студента по имени", command=self.open_delete_student_dialog)
-        file_menu.add_command(label="Удалить по братьям/сестрам", command=self.open_delete_siblings_dialog)
-        file_menu.add_command(label="Удалить по доходу", command=self.open_delete_income_dialog)
-        file_menu.add_command(label="Добавить студента", command=self.open_add_student_dialog)
-        file_menu.add_command(label="Обновить данные", command=self.load_data)
-        file_menu.add_command(label="Статистика", command=self.count)
-        menubar.add_cascade(label="Операции", menu=file_menu)
+        if self.mode == "xml":
+            file_menu.add_command(label="Выгрузка из файла", command=self.load_students_from_file)
+            file_menu.add_command(label="Поиск студента по имени", command=self.open_search_student_dialog)
+            file_menu.add_command(label="Поиск родителя по имени", command=self.open_search_parent_dialog)
+            file_menu.add_command(label="Поиск по братьям/сестрам", command=self.open_siblings_search_dialog)
+            file_menu.add_command(label="Поиск по доходу", command=self.open_income_search_dialog)
+            file_menu.add_separator()
+            file_menu.add_command(label="Удалить студента по имени", command=self.open_delete_student_dialog)
+            file_menu.add_command(label="Удалить по братьям/сестрам", command=self.open_delete_siblings_dialog)
+            file_menu.add_command(label="Удалить по доходу", command=self.open_delete_income_dialog)
+            file_menu.add_command(label="Добавить студента", command=self.open_add_student_dialog)
+            file_menu.add_command(label="Обновить данные", command=self.load_data)
+            file_menu.add_command(label="Статистика", command=self.count)
+            menubar.add_cascade(label="Операции", menu=file_menu)
+        else:
+            file_menu.add_command(label="Поиск студента по имени", command=self.open_search_student_dialog)
+            file_menu.add_command(label="Поиск родителя по имени", command=self.open_search_parent_dialog)
+            file_menu.add_command(label="Поиск по братьям/сестрам", command=self.open_siblings_search_dialog)
+            file_menu.add_command(label="Поиск по доходу", command=self.open_income_search_dialog)
+            file_menu.add_separator()
+            file_menu.add_command(label="Удалить студента по имени", command=self.open_delete_student_dialog)
+            file_menu.add_command(label="Удалить по братьям/сестрам", command=self.open_delete_siblings_dialog)
+            file_menu.add_command(label="Удалить по доходу", command=self.open_delete_income_dialog)
+            file_menu.add_command(label="Добавить студента", command=self.open_add_student_dialog)
+            file_menu.add_command(label="Обновить данные", command=self.load_data)
+            file_menu.add_command(label="Статистика", command=self.count)
+            menubar.add_cascade(label="Операции", menu=file_menu)
 
     def open_add_student_dialog(self):
         dialog = AddStudentDialog(self, self.controller)
