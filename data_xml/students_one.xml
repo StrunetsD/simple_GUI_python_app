@@ -1,254 +1,226 @@
-<?xml version="1.0" encoding="utf-8"?>
 <students>
   <student>
-    <fio>Иванов Иван Иванович</fio>
-    <father_fio>Иванов Иван Иванович</father_fio>
-    <mother_fio>Иванова Мария Петровна</mother_fio>
-    <father_income>50000.0</father_income>
-    <mother_income>30000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>2</sister_count>
-  </student>
-  <student>
-    <fio>Петров Петр Петрович</fio>
-    <father_fio>Петров Федор Петрович</father_fio>
-    <mother_fio>Петрова Анна Сергеевна</mother_fio>
-    <father_income>60000.0</father_income>
-    <mother_income>40000.0</mother_income>
-    <brother_count>0</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Сидоров Сидор Сидорович</fio>
-    <father_fio>Сидоров Сидор Сидорович</father_fio>
-    <mother_fio>Сидорова Ольга Александровна</mother_fio>
-    <father_income>70000.0</father_income>
-    <mother_income>50000.0</mother_income>
-    <brother_count>2</brother_count>
-    <sister_count>0</sister_count>
-  </student>
-  <student>
-    <fio>Алексеев Алексей Алексеевич</fio>
-    <father_fio>Алексеев Алексей Алексеевич</father_fio>
-    <mother_fio>Алексеева Наталья Викторовна</mother_fio>
+    <fio>Борисов Борис Борисович</fio>
+    <father_fio>Борисов Алексей Борисович</father_fio>
+    <mother_fio>Борисова Светлана Васильевна</mother_fio>
     <father_income>55000.0</father_income>
-    <mother_income>35000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Кузнецов Николай Николаевич</fio>
-    <father_fio>Кузнецов Николай Николаевич</father_fio>
-    <mother_fio>Кузнецова Светлана Валерьевна</mother_fio>
-    <father_income>62000.0</father_income>
-    <mother_income>38000.0</mother_income>
-    <brother_count>0</brother_count>
-    <sister_count>2</sister_count>
-  </student>
-  <student>
-    <fio>Васильев Василий Васильевич</fio>
-    <father_fio>Васильев Василий Васильевич</father_fio>
-    <mother_fio>Васильева Галина Александровна</mother_fio>
-    <father_income>56000.0</father_income>
-    <mother_income>42000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>0</sister_count>
-  </student>
-  <student>
-    <fio>Морозов Алексей Сергеевич</fio>
-    <father_fio>Морозов Николай Петрович</father_fio>
-    <mother_fio>Морозова Татьяна Юрьевна</mother_fio>
-    <father_income>59000.0</father_income>
-    <mother_income>39000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Семёнов Семён Семёнович</fio>
-    <father_fio>Семёнов Семён Семёнович</father_fio>
-    <mother_fio>Семёнова Ирина Владимировна</mother_fio>
-    <father_income>65000.0</father_income>
-    <mother_income>32000.0</mother_income>
-    <brother_count>2</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Григорьев Григорий Григорьевич</fio>
-    <father_fio>Григорьев Григорий Григорьевич</father_fio>
-    <mother_fio>Григорьева Валентина Петровна</mother_fio>
-    <father_income>70000.0</father_income>
-    <mother_income>42000.0</mother_income>
-    <brother_count>0</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Павлов Павел Павлович</fio>
-    <father_fio>Павлов Павел Павлович</father_fio>
-    <mother_fio>Павлова Елена Сергеевна</mother_fio>
-    <father_income>52000.0</father_income>
     <mother_income>36000.0</mother_income>
     <brother_count>1</brother_count>
     <sister_count>2</sister_count>
   </student>
   <student>
-    <fio>Фёдоров Фёдор Фёдорович</fio>
-    <father_fio>Фёдоров Фёдор Фёдорович</father_fio>
-    <mother_fio>Фёдорова Ирина Михайловна</mother_fio>
-    <father_income>58000.0</father_income>
-    <mother_income>40000.0</mother_income>
-    <brother_count>2</brother_count>
-    <sister_count>0</sister_count>
-  </student>
-  <student>
-    <fio>Ковалёв Виктор Викторович</fio>
-    <father_fio>Ковалёв Виктор Викторович</father_fio>
-    <mother_fio>Ковалёва Марина Андреевна</mother_fio>
-    <father_income>64000.0</father_income>
-    <mother_income>45000.0</mother_income>
+    <fio>Фомин Владимир Владимирович</fio>
+    <father_fio>Фомин Сергей Владимирович</father_fio>
+    <mother_fio>Фомина Оксана Николаевна</mother_fio>
+    <father_income>62000.0</father_income>
+    <mother_income>39000.0</mother_income>
     <brother_count>0</brother_count>
     <sister_count>1</sister_count>
   </student>
   <student>
-    <fio>Соловьёв Артем Артемович</fio>
-    <father_fio>Соловьёв Артем Артемович</father_fio>
-    <mother_fio>Соловьёва Анастасия Петровна</mother_fio>
-    <father_income>61000.0</father_income>
-    <mother_income>38000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>2</sister_count>
-  </student>
-  <student>
-    <fio>Киселёв Сергей Сергеевич</fio>
-    <father_fio>Киселёв Сергей Сергеевич</father_fio>
-    <mother_fio>Киселёва Наталья Владимировна</mother_fio>
-    <father_income>67000.0</father_income>
-    <mother_income>39000.0</mother_income>
-    <brother_count>2</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Зайцев Николай Николаевич</fio>
-    <father_fio>Зайцев Николай Николаевич</father_fio>
-    <mother_fio>Зайцева Ольга Васильевна</mother_fio>
+    <fio>Никитин Никита Никитич</fio>
+    <father_fio>Никитин Игорь Никитич</father_fio>
+    <mother_fio>Никитина Татьяна Петровна</mother_fio>
     <father_income>70000.0</father_income>
     <mother_income>42000.0</mother_income>
+    <brother_count>2</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Сергеев Сергей Сергеевич</fio>
+    <father_fio>Сергеев Николай Сергеевич</father_fio>
+    <mother_fio>Сергеева Ирина Викторовна</mother_fio>
+    <father_income>58000.0</father_income>
+    <mother_income>30000.0</mother_income>
     <brother_count>1</brother_count>
     <sister_count>0</sister_count>
   </student>
   <student>
-    <fio>Тимофеев Тимофей Тимофеевич</fio>
-    <father_fio>Тимофеев Тимофей Тимофеевич</father_fio>
-    <mother_fio>Тимофеева Людмила Сергеевна</mother_fio>
-    <father_income>58000.0</father_income>
-    <mother_income>30000.0</mother_income>
+    <fio>Савельев Савелий Савельевич</fio>
+    <father_fio>Савельев Артем Савельевич</father_fio>
+    <mother_fio>Савельева Анна Алексеевна</mother_fio>
+    <father_income>64000.0</father_income>
+    <mother_income>38000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Лебедев Александр Александрович</fio>
+    <father_fio>Лебедев Виктор Александрович</father_fio>
+    <mother_fio>Лебедева Елена Павловна</mother_fio>
+    <father_income>65000.0</father_income>
+    <mother_income>39000.0</mother_income>
     <brother_count>0</brother_count>
     <sister_count>2</sister_count>
   </student>
   <student>
-    <fio>Мартынов Степан Степанович</fio>
-    <father_fio>Мартынов Степан Степанович</father_fio>
-    <mother_fio>Мартынова Светлана Алексеевна</mother_fio>
+    <fio>Дорофеев Даниил Дорофеевич</fio>
+    <father_fio>Дорофеев Григорий Дорофеевич</father_fio>
+    <mother_fio>Дорофеева Наталья Степановна</mother_fio>
+    <father_income>49000.0</father_income>
+    <mother_income>35000.0</mother_income>
+    <brother_count>2</brother_count>
+    <sister_count>0</sister_count>
+  </student>
+  <student>
+    <fio>Яковлев Яков Яковлевич</fio>
+    <father_fio>Яковлев Петр Яковлевич</father_fio>
+    <mother_fio>Яковлева Валентина Викторовна</mother_fio>
+    <father_income>72000.0</father_income>
+    <mother_income>42000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Симонов Артемий Артемьевич</fio>
+    <father_fio>Симонов Алексей Артемьевич</father_fio>
+    <mother_fio>Симонова Ольга Николаевна</mother_fio>
+    <father_income>65000.0</father_income>
+    <mother_income>36000.0</mother_income>
+    <brother_count>0</brother_count>
+    <sister_count>2</sister_count>
+  </student>
+  <student>
+    <fio>Шевченко Ярослав Ярославович</fio>
+    <father_fio>Шевченко Андрей Ярославович</father_fio>
+    <mother_fio>Шевченко Инна Сергеевна</mother_fio>
+    <father_income>50000.0</father_income>
+    <mother_income>37000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Фролов Дмитрий Дмитриевич</fio>
+    <father_fio>Фролов Валерий Дмитриевич</father_fio>
+    <mother_fio>Фролова Анна Владимировна</mother_fio>
+    <father_income>58000.0</father_income>
+    <mother_income>46000.0</mother_income>
+    <brother_count>2</brother_count>
+    <sister_count>0</sister_count>
+  </student>
+  <student>
+    <fio>Куликов Владислав Владиславович</fio>
+    <father_fio>Куликов Алексей Владиславович</father_fio>
+    <mother_fio>Куликова Ирина Васильевна</mother_fio>
+    <father_income>59000.0</father_income>
+    <mother_income>38000.0</mother_income>
+    <brother_count>0</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Волков Егор Егорович</fio>
+    <father_fio>Волков Игорь Егорович</father_fio>
+    <mother_fio>Волкова Светлана Валерьевна</mother_fio>
+    <father_income>67000.0</father_income>
+    <mother_income>45000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Тихонов Станислав Станиславович</fio>
+    <father_fio>Тихонов Николай Станиславович</father_fio>
+    <mother_fio>Тихонова Марина Алексеевна</mother_fio>
+    <father_income>70000.0</father_income>
+    <mother_income>42000.0</mother_income>
+    <brother_count>2</brother_count>
+    <sister_count>0</sister_count>
+  </student>
+  <student>
+    <fio>Кузьмин Виктор Викторович</fio>
+    <father_fio>Кузьмин Сергей Викторович</father_fio>
+    <mother_fio>Кузьмина Анна Петровна</mother_fio>
     <father_income>54000.0</father_income>
     <mother_income>36000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Крылов Илья Ильич</fio>
-    <father_fio>Крылов Илья Ильич</father_fio>
-    <mother_fio>Крылова Вера Игоревна</mother_fio>
-    <father_income>64000.0</father_income>
-    <mother_income>42000.0</mother_income>
-    <brother_count>2</brother_count>
-    <sister_count>0</sister_count>
-  </student>
-  <student>
-    <fio>Ларин Алексей Владимирович</fio>
-    <father_fio>Ларин Алексей Владимирович</father_fio>
-    <mother_fio>Ларина Елена Сергеевна</mother_fio>
-    <father_income>67000.0</father_income>
-    <mother_income>38000.0</mother_income>
     <brother_count>0</brother_count>
-    <sister_count>1</sister_count>
+    <sister_count>3</sister_count>
   </student>
   <student>
-    <fio>Скворцов Виктор Андреевич</fio>
-    <father_fio>Скворцов Виктор Андреевич</father_fio>
-    <mother_fio>Скворцова Ирина Николаевна</mother_fio>
-    <father_income>59000.0</father_income>
-    <mother_income>45000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>2</sister_count>
-  </student>
-  <student>
-    <fio>Петрова Анна Сергеевна</fio>
-    <father_fio>Петров Иван Петрович</father_fio>
-    <mother_fio>Петрова Наталья Алексеевна</mother_fio>
-    <father_income>72000.0</father_income>
-    <mother_income>41000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>0</sister_count>
-  </student>
-  <student>
-    <fio>Семенов Игорь Игоревич</fio>
-    <father_fio>Семенов Игорь Игоревич</father_fio>
-    <mother_fio>Семенова Оксана Петровна</mother_fio>
-    <father_income>68000.0</father_income>
-    <mother_income>37000.0</mother_income>
-    <brother_count>2</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Гаврилов Арсений Арсеньевич</fio>
-    <father_fio>Гаврилов Арсений Арсеньевич</father_fio>
-    <mother_fio>Гаврилова Лариса Юрьевна</mother_fio>
-    <father_income>74000.0</father_income>
-    <mother_income>42000.0</mother_income>
-    <brother_count>0</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Федоров Платон Платонович</fio>
-    <father_fio>Федоров Платон Платонович</father_fio>
-    <mother_fio>Федорова Вера Александровна</mother_fio>
-    <father_income>70000.0</father_income>
-    <mother_income>46000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>0</sister_count>
-  </student>
-  <student>
-    <fio>Костин Андрей Андреевич</fio>
-    <father_fio>Костин Андрей Андреевич</father_fio>
-    <mother_fio>Костина Татьяна Ивановна</mother_fio>
-    <father_income>62000.0</father_income>
-    <mother_income>38000.0</mother_income>
-    <brother_count>2</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Дьяков Тимур Тимурович</fio>
-    <father_fio>Дьяков Тимур Тимурович</father_fio>
-    <mother_fio>Дьякова Анна Игоревна</mother_fio>
-    <father_income>59000.0</father_income>
-    <mother_income>43000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>2</sister_count>
-  </student>
-  <student>
-    <fio>Ковалев Артем Артемович</fio>
-    <father_fio>Ковалев Артем Артемович</father_fio>
-    <mother_fio>Ковалёва Ольга Викторовна</mother_fio>
-    <father_income>64000.0</father_income>
+    <fio>Мельников Павел Павлович</fio>
+    <father_fio>Мельников Николай Павлович</father_fio>
+    <mother_fio>Мельникова Надежда Дмитриевна</mother_fio>
+    <father_income>61000.0</father_income>
     <mother_income>39000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>2</sister_count>
+  </student>
+  <student>
+    <fio>Белоусов Тимур Тимурович</fio>
+    <father_fio>Белоусов Олег Тимурович</father_fio>
+    <mother_fio>Белоусова Татьяна Викторовна</mother_fio>
+    <father_income>66000.0</father_income>
+    <mother_income>44000.0</mother_income>
     <brother_count>0</brother_count>
     <sister_count>1</sister_count>
   </student>
   <student>
-    <fio>Сысоев Ярослав Ярославович</fio>
-    <father_fio>Сысоев Ярослав Ярославович</father_fio>
-    <mother_fio>Сысоева Маргарита Петровна</mother_fio>
-    <father_income>68000.0</father_income>
+    <fio>Суханов Максим Максимович</fio>
+    <father_fio>Суханов Валерий Максимович</father_fio>
+    <mother_fio>Суханова Ольга Сергеевна</mother_fio>
+    <father_income>63000.0</father_income>
     <mother_income>37000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>0</sister_count>
+  </student>
+  <student>
+    <fio>Васильев Арсений Арсеньевич</fio>
+    <father_fio>Васильев Григорий Арсеньевич</father_fio>
+    <mother_fio>Васильева Екатерина Игоревна</mother_fio>
+    <father_income>72000.0</father_income>
+    <mother_income>40000.0</mother_income>
+    <brother_count>2</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Панфилов Антон Антонович</fio>
+    <father_fio>Панфилов Василий Антонович</father_fio>
+    <mother_fio>Панфилова Лариса Юрьевна</mother_fio>
+    <father_income>54000.0</father_income>
+    <mother_income>36000.0</mother_income>
+    <brother_count>0</brother_count>
+    <sister_count>2</sister_count>
+  </student>
+  <student>
+    <fio>Капустин Владислав Владиславович</fio>
+    <father_fio>Капустин Григорий Владиславович</father_fio>
+    <mother_fio>Капустина Елена Сергеевна</mother_fio>
+    <father_income>50000.0</father_income>
+    <mother_income>31000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Седов Станислав Станиславович</fio>
+    <father_fio>Седов Виктор Станиславович</father_fio>
+    <mother_fio>Седова Наталья Дмитриевна</mother_fio>
+    <father_income>68000.0</father_income>
+    <mother_income>44000.0</mother_income>
+    <brother_count>2</brother_count>
+    <sister_count>0</sister_count>
+  </student>
+  <student>
+    <fio>Романов Роман Романович</fio>
+    <father_fio>Романов Алексей Романович</father_fio>
+    <mother_fio>Романова Галина Александровна</mother_fio>
+    <father_income>59000.0</father_income>
+    <mother_income>37000.0</mother_income>
+    <brother_count>1</brother_count>
+    <sister_count>2</sister_count>
+  </student>
+  <student>
+    <fio>Семенов Станислав Станиславович</fio>
+    <father_fio>Семенов Владимир Станиславович</father_fio>
+    <mother_fio>Семенова Марина Викторовна</mother_fio>
+    <father_income>74000.0</father_income>
+    <mother_income>46000.0</mother_income>
+    <brother_count>0</brother_count>
+    <sister_count>1</sister_count>
+  </student>
+  <student>
+    <fio>Герасимов Владислав Владиславович</fio>
+    <father_fio>Герасимов Олег Владиславович</father_fio>
+    <mother_fio>Герасимова Татьяна Петровна</mother_fio>
+    <father_income>61000.0</father_income>
+    <mother_income>32000.0</mother_income>
     <brother_count>1</brother_count>
     <sister_count>1</sister_count>
   </student>

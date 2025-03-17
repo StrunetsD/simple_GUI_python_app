@@ -14,7 +14,7 @@ def get_session():
         yield session
         session.commit()
     except Exception:
-        session.rollback()
+        session.rollback() #отмена всех изменений
         raise
     finally:
         session.close()

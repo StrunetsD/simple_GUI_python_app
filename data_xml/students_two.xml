@@ -1,13 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <students>
-  <student>
-    <fio>Борисов Борис Борисович</fio>
-    <father_fio>Борисов Алексей Борисович</father_fio>
-    <mother_fio>Борисова Светлана Васильевна</mother_fio>
-    <father_income>55000.0</father_income>
-    <mother_income>36000.0</mother_income>
-    <brother_count>1</brother_count>
-    <sister_count>2</sister_count>
-  </student>
   <student>
     <fio>Фомин Владимир Владимирович</fio>
     <father_fio>Фомин Сергей Владимирович</father_fio>
@@ -15,15 +7,6 @@
     <father_income>62000.0</father_income>
     <mother_income>39000.0</mother_income>
     <brother_count>0</brother_count>
-    <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Никитин Никита Никитич</fio>
-    <father_fio>Никитин Игорь Никитич</father_fio>
-    <mother_fio>Никитина Татьяна Петровна</mother_fio>
-    <father_income>70000.0</father_income>
-    <mother_income>42000.0</mother_income>
-    <brother_count>2</brother_count>
     <sister_count>1</sister_count>
   </student>
   <student>
@@ -115,15 +98,6 @@
     <mother_income>45000.0</mother_income>
     <brother_count>1</brother_count>
     <sister_count>1</sister_count>
-  </student>
-  <student>
-    <fio>Тихонов Станислав Станиславович</fio>
-    <father_fio>Тихонов Николай Станиславович</father_fio>
-    <mother_fio>Тихонова Марина Алексеевна</mother_fio>
-    <father_income>70000.0</father_income>
-    <mother_income>42000.0</mother_income>
-    <brother_count>2</brother_count>
-    <sister_count>0</sister_count>
   </student>
   <student>
     <fio>Кузьмин Виктор Викторович</fio>

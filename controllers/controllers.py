@@ -29,8 +29,8 @@ class Controller:
             return students
         return self.db.get_query_of_students()
 
-    def add_student(self, first_name, middle_name, last_name, father, mother,
-                    father_income, mother_income, brothers_count, sisters_count):
+    def add_student(self, first_name, middle_name, last_name, father, mother,brothers_count, sisters_count,
+                    father_income=None, mother_income=None):
         if self.mode == "xml":
             student_data = {
                 "fio": f"{last_name} {first_name} {middle_name}",

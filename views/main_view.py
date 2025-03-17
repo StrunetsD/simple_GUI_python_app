@@ -158,7 +158,6 @@ class MainWindow(tk.Tk):
             file_menu.add_command(label="Удалить по братьям/сестрам", command=self.open_delete_siblings_dialog)
             file_menu.add_command(label="Удалить по доходу", command=self.open_delete_income_dialog)
             file_menu.add_command(label="Добавить студента", command=self.open_add_student_dialog)
-            file_menu.add_command(label="Обновить данные", command=self.load_data)
             file_menu.add_command(label="Статистика", command=self.count)
             menubar.add_cascade(label="Операции", menu=file_menu)
         else:
